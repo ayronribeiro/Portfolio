@@ -212,7 +212,7 @@ function HeroSection() {
 function AboutSection() {
   const personalInterests = [
     { icon: <Gamepad2 className="h-5 w-5" />, label: "Games" },
-    { icon: <Gamepad2 className="h-5 w-5" />, label: "Consoles Retrô/Portáteis" },
+    { icon: <Gamepad2 className="h-5 w-5" />, label: "Consoles Portáteis" },
     { icon: <Code className="h-5 w-5" />, label: "Tecnologia" },
     { icon: <Brain className="h-5 w-5" />, label: "IA" },
     { icon: <Music className="h-5 w-5" />, label: "Música" },
