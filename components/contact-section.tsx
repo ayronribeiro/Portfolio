@@ -8,16 +8,16 @@ export function ContactSection() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Contato</h2>
           <p className="text-muted-foreground mb-8">
-            Tem um projeto em mente ou quer conversar? Entre em contato comigo!
+            Entre em contato comigo!
           </p>
 
           <div className="flex items-center justify-center mb-8">
             <Link
-              href="mailto:seuemail@email.com"
+              href="mailto:ayronribeiro.rr@gmail.com"
               className="flex items-center gap-2 text-lg font-medium hover:text-primary transition-colors"
             >
               <Mail className="h-5 w-5" />
-              seuemail@email.com
+              ayronribeiro.rr@gmail.com
             </Link>
           </div>
 
