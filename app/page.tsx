@@ -431,7 +431,7 @@ function StackSection() {
     },
     {
       name: "AWS",
-      icon: <Image src="/aws.svg" alt="AWS" width={100} height={100} className="h-100 w-100"/>
+      icon: <Image src="/aws2.svg" alt="AWS" width={100} height={100} className="h-100 w-100"/>
     },
     {
       name: "MongoDB",
