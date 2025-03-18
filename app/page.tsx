@@ -1,11 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
-import { Button, type ButtonProps } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge, type BadgeProps } from "@/components/ui/badge"
-import { type VariantProps } from "class-variance-authority"
+import { Badge } from "@/components/ui/badge"
+import { Loader } from "@/components/ui/loader"
 import {
   Gamepad2,
   Code,
@@ -31,21 +32,34 @@ import { WorkSection } from "@/components/work-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { TechStackCarousel } from "@/components/tech-stack-carousel"
-import { ThreeScene } from "./components/ThreeScene"
+import { LoadingScreen } from "@/components/loading-screen"
+
+const ThreeScene = dynamic(() => import("./components/ThreeScene").then(mod => mod.ThreeScene), {
+  ssr: false,
+  loading: () => (
+    <div className="w-[400px] h-[400px] flex items-center justify-center bg-background/80 backdrop-blur-sm rounded-lg">
+      <div className="text-center">
+        <Loader className="w-12 h-12 mb-4 mx-auto" />
+      </div>
+    </div>
+  )
+})
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <StackSection />
-        <WorkSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <LoadingScreen>
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <StackSection />
+          <WorkSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </LoadingScreen>
   )
 }
 
