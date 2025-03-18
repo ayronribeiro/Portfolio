@@ -2,9 +2,10 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button, type ButtonProps } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Badge, type BadgeProps } from "@/components/ui/badge"
+import { type VariantProps } from "class-variance-authority"
 import {
   Gamepad2,
   Code,
@@ -94,13 +95,6 @@ function Header() {
                 Sobre
               </Link>
               <Link
-                href="#stack"
-                className="text-sm font-medium hover:text-primary transition-colors p-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Stack
-              </Link>
-              <Link
                 href="#work"
                 className="text-sm font-medium hover:text-primary transition-colors p-2"
                 onClick={() => setIsMenuOpen(false)}
@@ -124,7 +118,7 @@ function Header() {
 
 function HeroSection() {
   return (
-    <section id="hero" className="min-h-screen flex items-center -mt-16">
+    <section id="hero" className="min-h-screen flex items-center md:-mt-16">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center">
           <div className="relative group">
@@ -218,7 +212,7 @@ function AboutSection() {
   ]
 
   return (
-    <section id="about" className="min-h-screen flex items-center bg-muted/50 py-10 md:py-20">
+    <section id="about" className="min-h-screen flex items-center bg-muted/50 py-16 md:py-20 scroll-mt-16">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="space-y-6 p-2 md:p-4">
