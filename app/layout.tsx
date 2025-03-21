@@ -1,24 +1,27 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { ThemeProvider } from './components/theme-provider'
-import Script from 'next/script'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "./components/theme-provider";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Ayron Rivero - Software Developer',
-  description: 'Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Nextjs e Strapi.',
-}
+  title: "Ayron Rivero | Software Developer",
+  description:
+    "Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Next.js e Strapi.",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt-BR" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -36,10 +39,8 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
