@@ -1,5 +1,6 @@
 "use client";
 
+import { Sun, ArrowRight, Mail, Moon, Laptop } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
@@ -27,12 +28,13 @@ import {
   Palette,
   Utensils
 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { WorkSection } from "@/components/work-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { TechStackCarousel } from "@/components/tech-stack-carousel"
 import { LoadingScreen } from "@/components/loading-screen"
+import { useTheme } from "./components/theme-provider"
 
 const ThreeScene = dynamic(() => import("./components/ThreeScene").then(mod => mod.ThreeScene), {
   ssr: false,
@@ -45,86 +47,99 @@ const ThreeScene = dynamic(() => import("./components/ThreeScene").then(mod => m
   )
 })
 
-export default function Portfolio() {
+// Componentes que precisam de hidratação imediata
+const ThemeButton = ({ className }: { className?: string }) => {
+  const { theme, toggleTheme } = useTheme()
+  const currentTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'dark' : 'dark'
+
   return (
-    <LoadingScreen>
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main>
-          <HeroSection />
-          <AboutSection />
-          <StackSection />
-          <WorkSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
-    </LoadingScreen>
+    <Button
+      variant="ghost"
+      size="icon"
+      className={className}
+      onClick={toggleTheme}
+    >
+      {(theme || currentTheme) === "dark" ? (
+        <Sun className="h-5 w-5 text-foreground" />
+      ) : (
+        <Moon className="h-5 w-5 text-foreground" />
+      )}
+    </Button>
+  )
+}
+
+const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
+  return (
+    <nav className="flex flex-col gap-2">
+      <Link href="#about" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Sobre</Link>
+      <Link href="#stacks" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Stacks</Link>
+      <Link href="#contact" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Contato</Link>
+    </nav>
+  )
+}
+
+function ThemeToggleFloat() {
+  return (
+    <ThemeButton className="fixed bottom-6 right-6 z-50 rounded-full md:hidden shadow-lg bg-background border-2" />
+  )
+}
+
+export default function Portfolio() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <StackSection />
+        <WorkSection />
+        <ContactSection />
+      </main>
+      <Footer />
+      <ThemeToggleFloat />
+    </div>
   )
 }
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const handleLinkClick = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between relative">
-        <Link href="/" className="font-bold">
-          <Image
-            src="/logo.png"
-            alt="Portfolio Logo"
-            width={40}
-            height={15}
-            priority
-          />
-        </Link>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="#about" className="text-sm font-medium hover:text-primary transition-colors">
-            Sobre
-          </Link>
-          <Link href="#work" className="text-sm font-medium hover:text-primary transition-colors">
-            Projetos
-          </Link>
-          <Link href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
-            Contato
-          </Link>
-          <Button variant="outline" size="sm" asChild className="hidden md:flex">
-            <Link href="/ayronribeiro.pdf" target="_blank" className="flex items-center gap-2">
-              <Download className="h-4 w-4" />
-              Currículo
-            </Link>
-          </Button>
-        </nav>
-        <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </Button>
-        {isMenuOpen && (
-          <div className="absolute top-16 left-0 right-0 bg-background border-b p-4 md:hidden">
-            <nav className="flex flex-col gap-2">
-              <Link
-                href="#about"
-                className="text-sm font-medium hover:text-primary transition-colors p-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sobre
-              </Link>
-              <Link
-                href="#work"
-                className="text-sm font-medium hover:text-primary transition-colors p-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Projetos
-              </Link>
-              <Link
-                href="#contact"
-                className="text-sm font-medium hover:text-primary transition-colors p-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contato
-              </Link>
-            </nav>
+    <header className="fixed top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b">
+      <div className="container flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2" onClick={handleLinkClick}>
+          <span className="text-primary font-bold text-xl">AR</span>
+          <div className="flex flex-col text-sm">
+            <span className="font-medium text-foreground">Ayron Rivero</span>
+            <span className="text-xs text-muted-foreground">Software Developer</span>
           </div>
-        )}
+        </Link>
+        <nav className="hidden md:flex items-center gap-8">
+          <Link href="#about" className="text-sm text-foreground hover:text-primary transition-colors">Sobre</Link>
+          <Link href="#stacks" className="text-sm text-foreground hover:text-primary transition-colors">Stacks</Link>
+          <Link href="#contact" className="text-sm text-foreground hover:text-primary transition-colors">Contato</Link>
+          <ThemeButton className="rounded-full" />
+        </nav>
+        <div className="md:hidden">
+          <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />}
+          </Button>
+          {isMenuOpen && (
+            <div className="absolute top-16 left-0 right-0 bg-background border-b p-4 animate-in slide-in-from-top-5 duration-200">
+              <MobileMenu onLinkClick={handleLinkClick} />
+            </div>
+          )}
+        </div>
       </div>
     </header>
   )
@@ -132,75 +147,63 @@ function Header() {
 
 function HeroSection() {
   return (
-    <section id="hero" className="min-h-screen flex items-center md:-mt-16">
+    <section className="min-h-screen flex items-center pt-24 sm:pt-16 md:pt-0">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center text-center">
-          <div className="relative group">
-            <ThreeScene />
-          </div>
-          
-          <div className="space-y-4 max-w-[600px]">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              <span className="text-primary">Ayron Rivero</span>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-4 md:space-y-4 text-center md:text-left order-2 md:order-1">
+            <div className="inline-block w-full md:w-auto">
+              <Badge variant="secondary" className="rounded-md px-3 py-1.5 text-sm md:text-base whitespace-nowrap dark:bg-zinc-900 bg-zinc-100">
+                Software Developer | Cybersecurity Specialist
+              </Badge>
+            </div>
+            <h1 className="text-2xl md:text-5xl font-bold text-foreground">
+              Ayron Rivero
             </h1>
-            <p className="text-xl text-muted-foreground">
-              Desenvolvedor Front-end Pleno com mais de 5 anos de experiência e pós-graduado em Cybersecurity. Apaixonado por desenvolver soluções inovadoras e seguras.
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-[350px] mx-auto md:max-w-none">
+              Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Nextjs e Strapi. 
+              Pós-graduado em Cybersecurity, aplico princípios de segurança para criar aplicações mais robustas.
             </p>
-            
-            <div className="flex justify-center gap-4 pt-4">
-              <Button asChild>
-                <Link href="#contact">Entre em contato</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link href="#work">Ver projetos</Link>
-              </Button>
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+              <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">React</Badge>
+              <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">Angular</Badge>
+              <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">Next.js</Badge>
+              <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">WordPress</Badge>
             </div>
-            
-            <div className="flex justify-center gap-4 pt-6">
-              <Link
-                href="https://github.com/ayronribeiro"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/ayron-ribeiro-rivero/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
-              <Link
-                href="https://twitter.com/ayronrr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link
-                href="https://instagram.com/ayronrr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-            </div>
-            <div className="md:hidden flex justify-center pt-2 pb-20">
-              <Button variant="outline" asChild>
-                <Link href="/ayronribeiro.pdf" target="_blank" className="flex items-center gap-2">
-                  <Download className="h-4 w-4" />
-                  Currículo
+            <div className="flex gap-4 justify-center md:justify-start">
+              <Button size="sm" className="text-xs md:text-sm">
+                <Link href="#stacks" className="flex items-center gap-2">
+                  Ver Stacks
+                  <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
                 </Link>
               </Button>
+              <Button variant="outline" size="sm" className="text-xs md:text-sm">
+                <Link href="#contact" className="flex items-center gap-2">
+                  Contato
+                </Link>
+              </Button>
+            </div>
+            <div className="flex gap-6 text-muted-foreground justify-center md:justify-start pb-8 md:pb-0">
+              <Link href="https://github.com/ayronribeiro" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4 md:h-5 md:w-5 hover:text-primary transition-colors" />
+              </Link>
+              <Link href="https://www.linkedin.com/in/ayron-ribeiro-rivero/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="h-4 w-4 md:h-5 md:w-5 hover:text-primary transition-colors" />
+              </Link>
+              <Link href="mailto:ayronribeiro.rr@gmail.com">
+                <Mail className="h-4 w-4 md:h-5 md:w-5 hover:text-primary transition-colors" />
+              </Link>
+            </div>
+          </div>
+          <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto order-1 md:order-2">
+            <div className="absolute inset-0 rounded-full bg-muted/30 backdrop-blur-sm flex items-center justify-center">
+              <Image
+                src="/eu.png"
+                alt="Minha foto"
+                width={400}
+                height={400}
+                className="rounded-full w-full h-full object-cover"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -225,50 +228,77 @@ function AboutSection() {
     { icon: <Utensils className="h-5 w-5" />, label: "Cozinhar" }
   ]
 
+  const currentProjects = [
+    {
+      type: "Projeto",
+      title: "Plataforma de envio de cobranças via WhatsApp",
+      icon: <Code className="h-5 w-5" />
+    },
+    {
+      type: "Freelance",
+      title: "Sites e aplicações para pequenas empresas",
+      icon: <Laptop className="h-5 w-5" />
+    },
+    {
+      type: "Estudo",
+      title: "Plugin WordPress que usa IA para gerar textos",
+      icon: <Brain className="h-5 w-5" />
+    }
+  ]
+
   return (
     <section id="about" className="min-h-screen flex items-center bg-muted/50 py-16 md:py-20 scroll-mt-16">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="space-y-6 p-2 md:p-4">
+          <div className="space-y-8 md:p-4">
             <div>
-              <h2 className="text-3xl font-bold">Ayron Rivero</h2>
-              <h3 className="text-xl font-medium text-primary mt-2">Software Developer | Especialista em Cybersecurity</h3>
+              <h2 className="text-3xl font-bold text-foreground">Ayron Rivero</h2>
+              <h3 className="text-lg font-medium text-primary mt-2">Software Developer | Cybersecurity Specialist</h3>
             </div>
 
-            <div>
-              <h4 className="text-lg font-semibold mb-2">Atualmente desenvolvendo:</h4>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <Badge variant="outline" className="px-2 py-0.5">
-                    Projeto
-                  </Badge>
-                  Um SaaS para gestão de projetos
-                </li>
-                <li className="flex items-center gap-2">
-                  <Badge variant="outline" className="px-2 py-0.5">
-                    Freelance
-                  </Badge>
-                  Sites e aplicações para pequenas empresas
-                </li>
-                <li className="flex items-center gap-2">
-                  <Badge variant="outline" className="px-2 py-0.5">
-                    Estudo
-                  </Badge>
-                  Plugin WordPress que usa IA para gerar textos
-                </li>
-              </ul>
-            </div>
-
-            <div>
+            <div className="md:hidden">
               <p className="text-muted-foreground">
-              Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia e performance. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia e performance. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
               </p>
               <p className="text-muted-foreground mt-4">
-              Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
+                Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
               </p>
             </div>
 
-            <div className="flex gap-4 pt-2">
+            <Card className="bg-card/50 backdrop-blur-sm">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-semibold mb-4 text-foreground flex items-center gap-2">
+                  Atualmente desenvolvendo
+                </h4>
+                <div className="space-y-4">
+                  {currentProjects.map((project, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 p-3 rounded-lg border bg-card/50 hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="text-primary mt-1">{project.icon}</div>
+                      <div className="space-y-1">
+                        <Badge variant="outline" className="px-2 py-0.5 bg-primary/10">
+                          {project.type}
+                        </Badge>
+                        <p className="text-foreground">{project.title}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="hidden md:block">
+              <p className="text-muted-foreground">
+                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia e performance. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+              </p>
+              <p className="text-muted-foreground mt-4">
+                Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
+              </p>
+            </div>
+
+            <div className="flex gap-4 pt-2 justify-center">
               <Link
                 href="https://github.com/ayronribeiro"
                 target="_blank"
@@ -309,17 +339,17 @@ function AboutSection() {
           </div>
 
           <div>
-            <Card className="h-full">
+            <Card className="bg-card">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-6">Interesses Pessoais</h3>
+                <h3 className="text-xl font-semibold mb-6 text-foreground">Interesses Pessoais</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {personalInterests.map((interest, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+                      className="flex items-center gap-3 p-2.5 rounded-lg border hover:bg-muted/50 transition-colors"
                     >
-                      <div className="text-primary">{interest.icon}</div>
-                      <span>{interest.label}</span>
+                      <div className="flex-shrink-0 text-primary">{interest.icon}</div>
+                      <span className="text-foreground text-sm leading-tight">{interest.label}</span>
                     </div>
                   ))}
                 </div>
@@ -452,7 +482,7 @@ function StackSection() {
   ];
 
   return (
-    <section className="py-20">
+    <section id="stacks" className="py-20">
       <div className="container">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold">Tech Stack</h2>

@@ -25,6 +25,7 @@ export function TechStackCarousel({ techStacks }: TechStackCarouselProps) {
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
+  const [itemsPerPage, setItemsPerPage] = useState(6)
 
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
@@ -44,75 +45,72 @@ export function TechStackCarousel({ techStacks }: TechStackCarouselProps) {
     }
   }, [emblaApi, onSelect])
 
-  // Group techStacks into sets of 12 (6x2 grid)
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 1024) {
+        setItemsPerPage(12)
+      } else if (window.innerWidth >= 640) {
+        setItemsPerPage(8)
+      } else {
+        setItemsPerPage(6)
+      }
+    }
+
+    updateItemsPerPage()
+    window.addEventListener('resize', updateItemsPerPage)
+    return () => window.removeEventListener('resize', updateItemsPerPage)
+  }, [])
+
+  // Group techStacks into sets based on itemsPerPage
   const groupedTechStacks = techStacks.reduce((acc, curr, i) => {
-    const groupIndex = Math.floor(i / 12)
+    const groupIndex = Math.floor(i / itemsPerPage)
     if (!acc[groupIndex]) {
       acc[groupIndex] = []
     }
     acc[groupIndex].push(curr)
     return acc
-  }, [] as TechStack[][]);
+  }, [] as TechStack[][])
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto">
-      <div className="overflow-hidden bg-white rounded-xl" ref={emblaRef}>
+    <div className="relative w-full mx-auto">
+      <div className="overflow-hidden bg-background rounded-xl" ref={emblaRef}>
         <div className="flex">
           {groupedTechStacks.map((group, groupIndex) => (
-            <div key={groupIndex} className="flex-[0_0_100%] min-w-0 relative p-8">
-              <div className="grid grid-cols-3 md:grid-cols-6 gap-8">
-                {group.slice(0, 6).map((tech, index) => (
+            <div key={groupIndex} className="flex-[0_0_100%] min-w-0 relative px-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-x-0.5 gap-y-4 sm:gap-6 max-w-[200px] sm:max-w-[1400px] mx-auto">
+                {group.map((tech, index) => (
                   <div
                     key={`${groupIndex}-${index}`}
-                    className="flex flex-col items-center justify-center gap-4"
+                    className="flex flex-col items-center justify-center gap-1 sm:gap-4"
                   >
-                    <div className="w-24 h-24 flex items-center justify-center bg-gray-900 rounded-xl shadow-lg transition-transform hover:scale-105">
-                      <div className="w-16 h-16 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-24 sm:h-24 flex items-center justify-center bg-zinc-900 rounded-xl shadow-lg transition-transform hover:scale-105">
+                      <div className="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center">
                         {tech.icon}
                       </div>
                     </div>
-                    <span className="text-sm font-medium text-gray-600">
+                    <span className="text-[10px] sm:text-sm font-medium text-muted-foreground">
                       {tech.name}
                     </span>
                   </div>
                 ))}
               </div>
-              {group.length > 6 && (
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-8 mt-8">
-                  {group.slice(6, 12).map((tech, index) => (
-                    <div
-                      key={`${groupIndex}-${index + 6}`}
-                      className="flex flex-col items-center justify-center gap-4"
-                    >
-                      <div className="w-24 h-24 flex items-center justify-center bg-gray-900 rounded-xl shadow-lg transition-transform hover:scale-105">
-                        <div className="w-16 h-16 flex items-center justify-center">
-                          {tech.icon}
-                        </div>
-                      </div>
-                      <span className="text-sm font-medium text-gray-600">
-                        {tech.name}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </div>
       <button
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur rounded-full p-2 shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-10"
+        className="absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur rounded-full p-1 sm:p-2 shadow-lg hover:bg-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-10"
         onClick={scrollPrev}
         disabled={!prevBtnEnabled}
       >
-        <ChevronLeft className="w-6 h-6 text-gray-800" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
       </button>
       <button
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur rounded-full p-2 shadow-lg hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-10"
+        className="absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur rounded-full p-1 sm:p-2 shadow-lg hover:bg-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed z-10"
         onClick={scrollNext}
         disabled={!nextBtnEnabled}
       >
-        <ChevronRight className="w-6 h-6 text-gray-800" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
       </button>
     </div>
   )
