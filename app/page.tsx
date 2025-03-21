@@ -109,6 +109,8 @@ export default function Portfolio() {
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { theme } = useTheme()
+  const currentTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') || 'dark' : 'dark'
 
   const handleLinkClick = useCallback(() => {
     setIsMenuOpen(false)
@@ -118,7 +120,25 @@ function Header() {
     <header className="fixed top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={handleLinkClick}>
-          <span className="text-primary font-bold text-xl">AR</span>
+          <div className="w-8 h-8">
+            {(theme || currentTheme) === "dark" ? (
+              <Image
+                src="/logobranca.png"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+              />
+            )}
+          </div>
           <div className="flex flex-col text-sm">
             <span className="font-medium text-foreground">Ayron Rivero</span>
             <span className="text-xs text-muted-foreground">Software Developer</span>
