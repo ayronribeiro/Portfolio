@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Ayron Rivero | Software Developer",
   description:
-    "Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Next.js e Strapi.",
+    "Software Developer com mais de 5 anos de experiência prática em projetos reais, incluindo projetos internacionais. Especializado em Angular, React, Next.js, WordPress e Strapi. Pós-graduado em Cybersecurity, aplico princípios de segurança para criar aplicações mais robustas.",
 };
 
 export default function RootLayout({
@@ -23,13 +23,13 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/favicon.png"/>
 
         <meta property="og:title" content="Ayron Rivero | Software Developer" />
-        <meta property="og:description" content="Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Next.js e Strapi."/>
+        <meta property="og:description" content="Software Developer especialista em Cybersecurity com mais de 5 anos de experiência, especializado em Angular, React, Next.js, Wordpress e Strapi."/>
         <meta property="og:image" content="/thumb.png"/> 
         <meta property="og:url" content="https://ayronrivero.vercel.app/"/> 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Ayron Rivero"/>
         <meta name="twitter:title" content="Ayron Rivero | Software Developer"/>
-        <meta name="twitter:description" content="Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Next.js e Strapi."/>
+        <meta name="twitter:description" content="Software Developer com mais de 5 anos de experiência, especializado em Angular, React, Next.js, Wordpress e Strapi."/>
         <meta name="twitter:image" content="/thumb.png"/>
         <meta name="twitter:card" content="summary_large_image"/>
 

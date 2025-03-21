@@ -180,8 +180,7 @@ function HeroSection() {
               Ayron Rivero
             </h1>
             <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-[350px] mx-auto md:max-w-none">
-              Software Developer com mais de 5 anos de experiência, especializado em WordPress, Angular, React, Nextjs e Strapi. 
-              Pós-graduado em Cybersecurity, aplico princípios de segurança para criar aplicações mais robustas.
+            Software Developer com mais de 5 anos de experiência prática em projetos reais, incluindo projetos internacionais. Pós-graduado em Cybersecurity, aplico princípios de segurança para criar aplicações mais robustas.
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">React</Badge>
@@ -278,7 +277,7 @@ function AboutSection() {
 
             <div className="md:hidden">
               <p className="text-muted-foreground">
-                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia e performance. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia, performance e segurança. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
               </p>
               <p className="text-muted-foreground mt-4">
                 Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
@@ -311,7 +310,7 @@ function AboutSection() {
 
             <div className="hidden md:block">
               <p className="text-muted-foreground">
-                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia e performance. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia, performance e segurança. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
               </p>
               <p className="text-muted-foreground mt-4">
                 Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
