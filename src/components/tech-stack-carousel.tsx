@@ -77,18 +77,18 @@ export function TechStackCarousel({ techStacks }: TechStackCarouselProps) {
         <div className="flex">
           {groupedTechStacks.map((group, groupIndex) => (
             <div key={groupIndex} className="flex-[0_0_100%] min-w-0 relative px-4">
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-x-0.5 gap-y-10 sm:gap-6 max-w-[250px] sm:max-w-[1400px] mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-6 max-w-[250px] sm:max-w-[1400px] mx-auto">
                 {group.map((tech, index) => (
                   <div
                     key={`${groupIndex}-${index}`}
-                    className="flex flex-col items-center justify-center gap-1 sm:gap-4"
+                    className="flex flex-col items-center justify-center gap-4"
                   >
-                    <div className="w-16 h-16 sm:w-24 sm:h-24 flex items-center justify-center bg-zinc-900 rounded-xl shadow-lg transition-transform hover:scale-105">
-                      <div className="w-10 h-10 sm:w-16 sm:h-16 flex items-center justify-center">
+                    <div className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-zinc-900 rounded-xl shadow-lg transition-transform hover:scale-105">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
                         {tech.icon}
                       </div>
                     </div>
-                    <span className="text-[10px] sm:text-sm font-medium text-muted-foreground">
+                    <span className="text-sm font-medium text-muted-foreground">
                       {tech.name}
                     </span>
                   </div>

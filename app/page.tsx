@@ -1,6 +1,6 @@
 "use client";
 
-import { Sun, ArrowRight, Mail, Moon, Laptop } from "lucide-react"
+import { Sun, ArrowRight, Mail, Moon, Laptop, Flag } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
@@ -71,9 +71,9 @@ const ThemeButton = ({ className }: { className?: string }) => {
 const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
   return (
     <nav className="flex flex-col gap-2">
-      <Link href="#about" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Sobre</Link>
+      <Link href="#about" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">About</Link>
       <Link href="#stacks" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Stacks</Link>
-      <Link href="#contact" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Contato</Link>
+      <Link href="#contact" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Contact</Link>
     </nav>
   )
 }
@@ -81,6 +81,18 @@ const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
 function ThemeToggleFloat() {
   return (
     <ThemeButton className="fixed bottom-6 right-6 z-50 rounded-full md:hidden shadow-lg bg-background border-2" />
+  )
+}
+
+function BrazilFlag() {
+  return (
+    <Image 
+      src="/brazil.svg" 
+      alt="Bandeira do Brasil" 
+      width={16} 
+      height={16} 
+      className="inline-block ml-2"
+    />
   )
 }
 
@@ -145,9 +157,9 @@ function Header() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#about" className="text-sm text-foreground hover:text-primary transition-colors">Sobre</Link>
+          <Link href="#about" className="text-sm text-foreground hover:text-primary transition-colors">About</Link>
           <Link href="#stacks" className="text-sm text-foreground hover:text-primary transition-colors">Stacks</Link>
-          <Link href="#contact" className="text-sm text-foreground hover:text-primary transition-colors">Contato</Link>
+          <Link href="#contact" className="text-sm text-foreground hover:text-primary transition-colors">Contact</Link>
           <ThemeButton className="rounded-full" />
         </nav>
         <div className="md:hidden">
@@ -170,17 +182,29 @@ function HeroSection() {
     <section className="min-h-screen flex items-center pt-24 sm:pt-16 md:pt-0">
       <div className="container px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto order-1 md:order-2">
+            <div className="absolute inset-0 rounded-full bg-muted/30 backdrop-blur-sm flex items-center justify-center">
+              <Image
+                src="/eu.png"
+                alt="Minha foto"
+                width={400}
+                height={400}
+                className="rounded-full w-full h-full object-cover"
+                priority
+              />
+            </div>
+          </div>
           <div className="space-y-4 md:space-y-4 text-center md:text-left order-2 md:order-1">
             <div className="inline-block w-full md:w-auto">
               <Badge variant="secondary" className="rounded-md px-3 py-1.5 text-sm md:text-base whitespace-nowrap dark:bg-zinc-900 bg-zinc-100">
-                Software Developer | Cybersecurity Specialist
+              Software Developer | Cybersecurity Specialist <BrazilFlag />
               </Badge>
             </div>
             <h1 className="text-2xl md:text-5xl font-bold text-foreground">
-              Ayron Rivero
+            Hi, I'm Ayron! 👋
             </h1>
             <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-[350px] mx-auto md:max-w-none">
-            Software Developer com mais de 5 anos de experiência prática em projetos reais, incluindo projetos internacionais. Pós-graduado em Cybersecurity, aplico princípios de segurança para criar aplicações mais robustas.
+            I'm a Software Developer with over 5 years of experience, working on real-world projects, including international ones. I have a postgraduate degree in Cybersecurity, which helps me build secure and scalable applications.
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Badge variant="outline" className="rounded-full px-2 py-0.5 text-xs md:text-sm text-foreground">React</Badge>
@@ -191,13 +215,13 @@ function HeroSection() {
             <div className="flex gap-4 justify-center md:justify-start">
               <Button size="sm" className="text-xs md:text-sm">
                 <Link href="#stacks" className="flex items-center gap-2">
-                  Ver Stacks
+                View Stacks
                   <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
                 </Link>
               </Button>
               <Button variant="outline" size="sm" className="text-xs md:text-sm">
                 <Link href="#contact" className="flex items-center gap-2">
-                  Contato
+                Contact
                 </Link>
               </Button>
             </div>
@@ -213,18 +237,6 @@ function HeroSection() {
               </Link>
             </div>
           </div>
-          <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto order-1 md:order-2">
-            <div className="absolute inset-0 rounded-full bg-muted/30 backdrop-blur-sm flex items-center justify-center">
-              <Image
-                src="/eu.png"
-                alt="Minha foto"
-                width={400}
-                height={400}
-                className="rounded-full w-full h-full object-cover"
-                priority
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -233,34 +245,34 @@ function HeroSection() {
 
 function AboutSection() {
   const personalInterests = [
-    { icon: <Gamepad2 className="h-5 w-5" />, label: "Games" },
-    { icon: <Gamepad2 className="h-5 w-5" />, label: "Consoles Portáteis" },
-    { icon: <Code className="h-5 w-5" />, label: "Tecnologia" },
-    { icon: <Brain className="h-5 w-5" />, label: "IA" },
-    { icon: <Music className="h-5 w-5" />, label: "Música" },
-    { icon: <Film className="h-5 w-5" />, label: "Filmes e Séries" },
-    { icon: <BookOpen className="h-5 w-5" />, label: "Livros" },
+    { icon: <Gamepad2 className="h-5 w-5" />, label: "Gaming" },
+    { icon: <Gamepad2 className="h-5 w-5" />, label: "Handheld Consoles" },
+    { icon: <Code className="h-5 w-5" />, label: "Technology" },
+    { icon: <Brain className="h-5 w-5" />, label: "AI" },
+    { icon: <Music className="h-5 w-5" />, label: "Music" },
+    { icon: <Film className="h-5 w-5" />, label: "Movies & TV Shows" },
+    { icon: <BookOpen className="h-5 w-5" />, label: "Books" },
     { icon: <Shield className="h-5 w-5" />, label: "Cybersecurity" },
-    { icon: <Dumbbell className="h-5 w-5" />, label: "Academia" },
-    { icon: <Cat className="h-5 w-5" />, label: "Vídeos de Gatinhos" },
-    { icon: <Palette className="h-5 w-5" />, label: "Arte e Design" },
-    { icon: <Utensils className="h-5 w-5" />, label: "Cozinhar" }
+    { icon: <Dumbbell className="h-5 w-5" />, label: "Gym" },
+    { icon: <Cat className="h-5 w-5" />, label: "Cat Videos" },
+    { icon: <Palette className="h-5 w-5" />, label: "Art & Design" },
+    { icon: <Utensils className="h-5 w-5" />, label: "Cooking" }
   ]
 
   const currentProjects = [
     {
-      type: "Projeto",
-      title: "Plataforma de envio de cobranças via WhatsApp",
+      type: "Project",
+      title: "Payment request platform via WhatsApp",
       icon: <Code className="h-5 w-5" />
     },
     {
       type: "Freelance",
-      title: "Sites e aplicações para pequenas empresas",
+      title: "Websites and applications for small businesses",
       icon: <Laptop className="h-5 w-5" />
     },
     {
-      type: "Estudo",
-      title: "Plugin WordPress que usa IA para gerar textos",
+      type: "Learning",
+      title: "WordPress plugin that uses AI to generate content",
       icon: <Brain className="h-5 w-5" />
     }
   ]
@@ -277,17 +289,17 @@ function AboutSection() {
 
             <div className="md:hidden">
               <p className="text-muted-foreground">
-                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia, performance e segurança. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+              With over 5 years of experience in web development, I create scalable and secure digital solutions, combining technology, performance, and security. I work with React, Next.js, Angular, WordPress, and Strapi, always focused on user experience and best development practices.
               </p>
               <p className="text-muted-foreground mt-4">
-                Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
+              My passion for technology goes beyond coding. I love structuring projects that are efficient, intuitive, and, above all, secure. If you'd like to chat or discuss a project, feel free to <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>reach out!</span>
               </p>
             </div>
 
             <Card className="bg-card/50 backdrop-blur-sm">
               <CardContent className="p-6">
                 <h4 className="text-lg font-semibold mb-4 text-foreground flex items-center gap-2">
-                  Atualmente desenvolvendo
+                Currently working on
                 </h4>
                 <div className="space-y-4">
                   {currentProjects.map((project, index) => (
@@ -310,10 +322,10 @@ function AboutSection() {
 
             <div className="hidden md:block">
               <p className="text-muted-foreground">
-                Com mais de 5 anos de experiência no desenvolvimento web, crio soluções digitais escaláveis e seguras, unindo tecnologia, performance e segurança. Trabalho com React, Next.js, Angular, Wordpress e Strapi, sempre focado na experiência do usuário e nas melhores práticas de desenvolvimento.
+              With over 5 years of experience in web development, I create scalable and secure digital solutions, combining technology, performance, and security. I work with React, Next.js, Angular, WordPress, and Strapi, always focused on user experience and best development practices.
               </p>
               <p className="text-muted-foreground mt-4">
-                Minha paixão pela tecnologia vai além do código. Gosto de estruturar projetos que sejam eficientes, intuitivos e, acima de tudo, seguros. Se quiser trocar ideias ou falar sobre projetos, pode entrar em <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>contato!</span>
+              My passion for technology goes beyond coding. I love structuring projects that are efficient, intuitive, and, above all, secure. If you'd like to chat or discuss a project, feel free to <span className="text-primary font-bold cursor-pointer hover:underline" onClick={() => window.location.href = '#contact'}>reach out!</span>
               </p>
             </div>
 
@@ -400,7 +412,7 @@ function AboutSection() {
           <div>
             <Card className="bg-card">
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-6 text-foreground">Interesses Pessoais</h3>
+                <h3 className="text-xl font-semibold mb-6 text-foreground">Personal Interests</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {personalInterests.map((interest, index) => (
                     <div
@@ -545,7 +557,7 @@ function StackSection() {
       <div className="container">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold">Tech Stack</h2>
-          <p className="text-muted-foreground">Explorando as tecnologias que impulsionam minhas soluções</p>
+          <p className="text-muted-foreground">Exploring the technologies that power my solutions</p>
         </div>
         <TechStackCarousel techStacks={techStack} />
       </div>

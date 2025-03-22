@@ -6,9 +6,9 @@ export function ContactSection() {
     <section id="contact" className="py-20">
       <div className="container px-4 md:px-6">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Contact</h2>
+          <h2 className="text-3xl font-bold mb-4">Contato</h2>
           <p className="text-muted-foreground mb-8">
-          Get in touch with me!
+            Entre em contato comigo!
           </p>
 
           <div className="flex items-center justify-center mb-8">

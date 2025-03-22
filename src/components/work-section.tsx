@@ -9,7 +9,7 @@ export function WorkSection() {
   const projects = [
     {
       title: "Mydieselclaim",
-      description: "A platform by Pogust Goodhead against diesel emissions fraud. Developed landing pages, optimized for high traffic, and integrated an automated chatbot.",
+      description: "Plataforma da Pogust Goodhead contra fraude em emissões de diesel. Criação de landing pages, otimização para alta demanda e bot automatizado.",
       image: "/projects/diesel.mp4",
       tags: ["Wordpress", "HTML", "CSS", "JavaScript", "PHP", "Landbot"],
       demoUrl: "https://mydieselclaim.com/",
@@ -17,7 +17,7 @@ export function WorkSection() {
     },
     {
       title: "Somos",
-      description: "Developed the institutional website for Somos, a legal tech company providing technology, marketing, design, and various other services for law firms.",
+      description: "Desenvolvi juntamente com outros desenvolvedores o site institucional da Somos, uma legal tech que oferece serviços de tecnologia, marketing, design e diveros outros serviços para escritórios de advocacia.",
       image: "/projects/somos.mp4",
       tags: ["Angular", "TypeScript", "SASS", "Strapi API", "Angular Material", "Ngx-translate"],
       demoUrl: "https://somos.us",
@@ -25,15 +25,15 @@ export function WorkSection() {
     },
     {
       title: "Vrauu Energy Drink",
-      description: "E-commerce website for Vrauu Energy Drink, featuring shopping cart, checkout, login, sign-up, order tracking, Mercado Pago integration, and ERP stock management.",
+      description: "Site de e-commerce para a empresa Vrauu Energy Drink, com carrinho de compras, checkout, login, cadastro, rastreio de pedidos, Mercado Pago, integração com ERP pra controle de estoque etc.",
       image: "/projects/vrauu.mp4",
       tags: ["Wordpress", "Woocommerce", "CSS", "JavaScript", "PHP", "Mercado Pago", "Bling"],
       demoUrl: "https://loja.vrauu.com",
       featured: true,
     },
     {
-      title: "Digital Bank",
-      description: "A digital banking platform with transfers, investments, transaction history, cards, and more.",
+      title: "Banco Digital",
+      description: "Plataforma de banco digital, transferências, investimentos, histórico de transações, cartões, etc.",
       image: "/projects/bancodigital.mp4",
       tags: ["React", "Next.js", "shadcn/ui", "Tailwind CSS", "TypeScript"],
       demoUrl: "https://ayronrivero-banco-digital.vercel.app/",
@@ -41,8 +41,8 @@ export function WorkSection() {
       featured: true,
     },
     {
-      title: "Login & Signup Page",
-      description: "A modern and responsive login and signup page.",
+      title: "Pagina de Login e Cadastro",
+      description: "Página de login e cadastro moderna e responsiva.",
       image: "/projects/login.mp4",
       tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Shadcn/ui"],
       demoUrl: "https://ayronrivero-login-page.vercel.app/",
@@ -50,8 +50,8 @@ export function WorkSection() {
       featured: true,
     },
     {
-      title: "Pogust Goodhead Website",
-      description: "Institutional website for Pogust Goodhead, featuring company information, services, contact, location, and more.",
+      title: "Site Institucional Pogust Goodhead",
+      description: "Site institucional para a empresa Pogust Goodhead, com informações sobre a empresa, serviços, contato, localização e muito mais.",
       image: "/projects/pogust.mp4",
       tags: ["Wordpress", "CSS", "PHP", "JavaScript", "JetEngine", "JetSmartFilter"],
       demoUrl: "https://pogustgoodhead.com",
@@ -62,9 +62,9 @@ export function WorkSection() {
   return (
     <section id="work" className="py-20 bg-muted/50">
       <div className="container px-4 md:px-6">
-        <h2 className="text-3xl font-bold text-center mb-4">My Projects</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">Meus Projetos</h2>
         <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-        Here are some of the projects I’ve worked on.
+          Aqui estão alguns dos projetos que eu trabalhei.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-9xl mx-auto">
@@ -107,7 +107,7 @@ export function WorkSection() {
                     <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                       <Button size="sm" variant="secondary" className="rounded-full">
                         <ExternalLink className="h-4 w-4 mr-2" />
-                        Visit Website
+                        Visitar Site
                       </Button>
                     </Link>
                   </div>
