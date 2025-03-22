@@ -87,11 +87,11 @@ function ThemeToggleFloat() {
 function BrazilFlag() {
   return (
     <Image 
-      src="/brazil.svg" 
+      src="/brazilflag.svg" 
       alt="Bandeira do Brasil" 
-      width={16} 
-      height={16} 
-      className="inline-block ml-2"
+      width={20} 
+      height={20} 
+      className="inline-block ml-2 flex-shrink-0"
     />
   )
 }
@@ -195,10 +195,13 @@ function HeroSection() {
             </div>
           </div>
           <div className="space-y-4 md:space-y-4 text-center md:text-left order-2 md:order-1">
-            <div className="inline-block w-full md:w-auto">
-              <Badge variant="secondary" className="rounded-md px-3 py-1.5 text-sm md:text-base whitespace-nowrap dark:bg-zinc-900 bg-zinc-100">
-              Software Developer | Cybersecurity Specialist <BrazilFlag />
-              </Badge>
+            <div className="flex justify-center md:justify-start">
+              <div className="inline-flex items-center">
+                <Badge variant="secondary" className="rounded-md px-3 py-1.5 text-sm md:text-base whitespace-nowrap dark:bg-zinc-900 bg-zinc-100 inline-flex items-center min-w-max">
+                  <span className="flex-shrink-0">Software Developer | Cybersecurity Specialist</span>
+                  <BrazilFlag />
+                </Badge>
+              </div>
             </div>
             <h1 className="text-2xl md:text-5xl font-bold text-foreground">
             Hi, I'm Ayron! 👋
