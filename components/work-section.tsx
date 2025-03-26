@@ -8,6 +8,15 @@ import { Github, ExternalLink } from "lucide-react"
 export function WorkSection() {
   const projects = [
     {
+      title: "Weezap",
+      description: "Weezap is a tool that simplifies billing and automates payment reminders via WhatsApp.",
+      image: "/projects/weezap.mp4",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Radix UI", "Shadcn/ui", "Recharts", "Papaparse"],
+      demoUrl: "#",
+      githubUrl: "",
+      featured: true,
+    },
+    {
       title: "Mydieselclaim",
       description: "A platform by Pogust Goodhead against diesel emissions fraud. Developed landing pages, optimized for high traffic, and integrated an automated chatbot.",
       image: "/projects/diesel.mp4",
@@ -38,15 +47,6 @@ export function WorkSection() {
       tags: ["React", "Next.js", "shadcn/ui", "Tailwind CSS", "TypeScript"],
       demoUrl: "https://ayronrivero-banco-digital.vercel.app/",
       githubUrl: "https://github.com/ayronribeiro/banco-digital/",
-      featured: true,
-    },
-    {
-      title: "Login & Signup Page",
-      description: "A modern and responsive login and signup page.",
-      image: "/projects/login.mp4",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Shadcn/ui"],
-      demoUrl: "https://ayronrivero-login-page.vercel.app/",
-      githubUrl: "https://github.com/ayronribeiro/login-page",
       featured: true,
     },
     {
@@ -94,24 +94,26 @@ export function WorkSection() {
                     quality={100}
                   />
                 )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="flex gap-4">
-                    {project.githubUrl && (
-                      <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Button size="sm" variant="secondary" className="rounded-full">
-                          <Github className="h-4 w-4 mr-2" />
-                          GitHub
-                        </Button>
-                      </Link>
-                    )}
-                    <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                      <Button size="sm" variant="secondary" className="rounded-full">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Visit Website
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="flex gap-4">
+                {project.githubUrl && (
+                  <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" variant="secondary" className="rounded-full">
+                      <Github className="h-4 w-4 mr-2" />
+                      GitHub
+                    </Button>
+                  </Link>
+                )}
+                {project.demoUrl !== "#" && (
+                  <Link href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" variant="secondary" className="rounded-full">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Visit Website
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </div>
               </div>
 
               <CardContent className="p-6">
