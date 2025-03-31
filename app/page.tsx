@@ -74,6 +74,15 @@ const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
       <Link href="#about" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">About</Link>
       <Link href="#stacks" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Stacks</Link>
       <Link href="#contact" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Contact</Link>
+      <Link 
+        href="/ayronribeiroen.pdf" 
+        target="_blank" 
+        onClick={onLinkClick} 
+        className="mt-2 p-2 border rounded-md flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary/20 transition-colors text-foreground font-medium"
+      >
+        Resume
+        <Download className="h-4 w-4" />
+      </Link>
     </nav>
   )
 }
@@ -160,6 +169,12 @@ function Header() {
           <Link href="#about" className="text-sm text-foreground hover:text-primary transition-colors">About</Link>
           <Link href="#stacks" className="text-sm text-foreground hover:text-primary transition-colors">Stacks</Link>
           <Link href="#contact" className="text-sm text-foreground hover:text-primary transition-colors">Contact</Link>
+          <Button variant="outline" size="sm" className="text-sm">
+            <Link href="/ayronribeiroen.pdf" target="_blank" className="flex items-center gap-2">
+              Resume
+              <Download className="h-4 w-4" />
+            </Link>
+          </Button>
           <ThemeButton className="rounded-full" />
         </nav>
         <div className="md:hidden">
@@ -185,7 +200,7 @@ function HeroSection() {
           <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto order-1 md:order-2">
             <div className="absolute inset-0 rounded-full bg-muted/30 backdrop-blur-sm flex items-center justify-center">
               <Image
-                src="/eu.png"
+                src="/euu.jpg"
                 alt="Minha foto"
                 width={400}
                 height={400}
