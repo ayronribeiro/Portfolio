@@ -75,7 +75,7 @@ const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
       <Link href="#stacks" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Stacks</Link>
       <Link href="#contact" onClick={onLinkClick} className="p-2 text-foreground hover:text-primary transition-colors">Contact</Link>
       <Link 
-        href="/ayronribeiroen.pdf" 
+        href="/resume.pdf" 
         target="_blank" 
         onClick={onLinkClick} 
         className="mt-2 p-2 border rounded-md flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary/20 transition-colors text-foreground font-medium"
@@ -170,7 +170,7 @@ function Header() {
           <Link href="#stacks" className="text-sm text-foreground hover:text-primary transition-colors">Stacks</Link>
           <Link href="#contact" className="text-sm text-foreground hover:text-primary transition-colors">Contact</Link>
           <Button variant="outline" size="sm" className="text-sm">
-            <Link href="/ayronribeiroen.pdf" target="_blank" className="flex items-center gap-2">
+            <Link href="/resume.pdf" target="_blank" className="flex items-center gap-2">
               Resume
               <Download className="h-4 w-4" />
             </Link>
