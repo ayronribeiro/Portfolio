@@ -35,6 +35,8 @@ import { Footer } from "@/components/footer"
 import { TechStackCarousel } from "@/components/tech-stack-carousel"
 import { LoadingScreen } from "@/components/loading-screen"
 import { useTheme } from "./components/theme-provider"
+import { Chatbot } from "../components/chatbot"
+import { motion } from "framer-motion"
 
 const ThreeScene = dynamic(() => import("./components/ThreeScene").then(mod => mod.ThreeScene), {
   ssr: false,
@@ -112,6 +114,32 @@ export default function Portfolio() {
     setMounted(true)
   }, [])
 
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
+          <div className="flex gap-1">
+            <motion.span
+              className="w-2 h-2 rounded-full bg-primary"
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+            />
+            <motion.span
+              className="w-2 h-2 rounded-full bg-primary"
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+            />
+            <motion.span
+              className="w-2 h-2 rounded-full bg-primary"
+              animate={{ scale: [1, 1.5, 1] }}
+              transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -124,6 +152,7 @@ export default function Portfolio() {
       </main>
       <Footer />
       <ThemeToggleFloat />
+      <Chatbot />
     </div>
   )
 }
