@@ -91,7 +91,7 @@ const MobileMenu = ({ onLinkClick }: { onLinkClick: () => void }) => {
 
 function ThemeToggleFloat() {
   return (
-    <ThemeButton className="fixed bottom-6 right-6 z-50 rounded-full md:hidden shadow-lg bg-background border-2" />
+    <ThemeButton className="fixed top-4 right-4 z-50 rounded-full md:hidden shadow-lg bg-background border-2" />
   )
 }
 
@@ -151,7 +151,6 @@ export default function Portfolio() {
         <ContactSection />
       </main>
       <Footer />
-      <ThemeToggleFloat />
       <Chatbot />
     </div>
   )
@@ -206,7 +205,8 @@ function Header() {
           </Button>
           <ThemeButton className="rounded-full" />
         </nav>
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeButton className="rounded-full" />
           <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />}
           </Button>

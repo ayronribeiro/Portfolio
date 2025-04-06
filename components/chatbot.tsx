@@ -78,7 +78,7 @@ export function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-40">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -86,9 +86,9 @@ export function Chatbot() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-16 right-0 mb-2"
+            className="fixed inset-x-4 bottom-24 sm:absolute sm:bottom-16 sm:right-0 sm:left-auto sm:mb-0 sm:inset-x-auto"
           >
-            <Card className="w-[350px] bg-background/80 backdrop-blur-sm shadow-lg border-primary/10">
+            <Card className="w-full sm:w-[350px] bg-background/80 backdrop-blur-sm shadow-lg border-primary/10">
               <div className="flex items-center justify-between p-3 border-b bg-primary/5">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full dark:bg-white bg-primary/10 flex items-center justify-center">
