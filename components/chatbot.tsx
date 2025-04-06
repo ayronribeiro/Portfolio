@@ -141,8 +141,8 @@ export function Chatbot() {
                         <p className="text-sm">{message.content}</p>
                       </div>
                       {message.role === "user" && (
-                        <div className="w-8 h-8 rounded-full dark:bg-white bg-primary/10 flex items-center justify-center">
-                          <User className="h-4 w-4 text-primary" />
+                        <div className="w-8 h-8 rounded-full dark:bg-primary/10 bg-primary/10 flex items-center justify-center">
+                          <User className="h-4 w-4 text-primary dark:text-white" />
                         </div>
                       )}
                     </div>
