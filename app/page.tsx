@@ -35,7 +35,7 @@ import { Footer } from "@/components/footer"
 import { TechStackCarousel } from "@/components/tech-stack-carousel"
 import { LoadingScreen } from "@/components/loading-screen"
 import { useTheme } from "./components/theme-provider"
-import { Chatbot } from "../components/chatbot"
+// import { Chatbot } from "../components/chatbot"
 import { motion } from "framer-motion"
 
 const ThreeScene = dynamic(() => import("./components/ThreeScene").then(mod => mod.ThreeScene), {
@@ -151,7 +151,7 @@ export default function Portfolio() {
         <ContactSection />
       </main>
       <Footer />
-      <Chatbot />
+      {/* <Chatbot /> */}
     </div>
   )
 }
